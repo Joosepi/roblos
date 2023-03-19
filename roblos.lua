@@ -9,7 +9,7 @@ local LocalPlayer = Players.LocalPlayer
 local SilentAimEnabled = true
 local TargetPart = {"Head", "HumanoidRootPart"} -- list of parts to aim at
 local AccommodationFactor = 0.14333
-local FOV = 30
+local FOV = 32
 
 -- // Silent Aim Module
 local SilentAim = loadstring(game:HttpGet("https://pastebin.com/raw/2f0mGbMP"))()
