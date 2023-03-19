@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 -- // Vars
 local LocalPlayer = Players.LocalPlayer
 local SilentAimEnabled = true
-local TargetPart = "Head", "HumanoidRootPart",
+local TargetPart = {"Head", "HumanoidRootPart"} -- list of parts to aim at
 local AccommodationFactor = 0.14333
 local FOV = 30
 
@@ -31,15 +31,27 @@ setreadonly(mt, false)
 mt.__index = newcclosure(function(t, k)
     if t:IsA("Mouse") and k == "Hit" then
         local CPlayer = SilentAim.Selected
-        if checkSilentAim() and CPlayer.Character and CPlayer.Character:FindFirstChild(TargetPart) then
-            local TargetCFrame = CPlayer.Character[TargetPart].CFrame
-            local TargetVelocity = CPlayer.Character[TargetPart].Velocity
-            local AimPosition = TargetCFrame.p + TargetVelocity * AccommodationFactor
-            local CurrentPosition = LocalPlayer.Character.Head.Position
-            local Distance = (AimPosition - CurrentPosition).magnitude
+        if checkSilentAim() and CPlayer.Character then
+            local closestDistance = math.huge
+            local closestPart = nil
+            for _, partName in ipairs(TargetPart) do
+                local part = CPlayer.Character:FindFirstChild(partName)
+                if part then
+                    local TargetCFrame = part.CFrame
+                    local TargetVelocity = part.Velocity
+                    local AimPosition = TargetCFrame.p + TargetVelocity * AccommodationFactor
+                    local CurrentPosition = LocalPlayer.Character.Head.Position
+                    local Distance = (AimPosition - CurrentPosition).magnitude
 
-            if Distance <= FOV then
-                return {p = AimPosition}
+                    if Distance <= FOV and Distance < closestDistance then
+                        closestDistance = Distance
+                        closestPart = part
+                    end
+                end
+            end
+
+            if closestPart then
+                return {p = closestPart.Position}
             end
         end
     end
