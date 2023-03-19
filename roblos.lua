@@ -6,10 +6,10 @@ local Players = game:GetService("Players")
 
 -- // Vars
 local LocalPlayer = Players.LocalPlayer
-local SilentAimEnabled = false
-local TargetPart = "UpperTorso", "HumanoidRootPart", "Head",
+local SilentAimEnabled = enabled
+local TargetPart = "Head",, "HumanoidRootPart",
 local AccommodationFactor = 0.143324
-local FOV = 24
+local FOV = 27
 
 -- // Silent Aim Module
 local SilentAim = loadstring(game:HttpGet("https://pastebin.com/raw/2f0mGbMP"))()
