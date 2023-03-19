@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 -- // Vars
 local LocalPlayer = Players.LocalPlayer
 local SilentAimEnabled = enabled
-local TargetPart = "Head",, "HumanoidRootPart",
+local TargetPart = "Head", "HumanoidRootPart",
 local AccommodationFactor = 0.143324
 local FOV = 27
 
