@@ -16,7 +16,7 @@ local Players = game:GetService("Players")
 
 -- // Vars
 local LocalPlayer = Players.LocalPlayer
-local accommodationFactor = 0.1474432
+local accommodationFactor = 0.1474432  --// ssuming a ping of 80-100 and a relatively constant target speed, an accommodationFactor of around 0.15-0.2
 local targetPart = {"HumanoidRootPart", "Head"}
 
 -- // Silent Aim Module
