@@ -17,7 +17,7 @@ local Players = game:GetService("Players")
 -- // Vars
 local LocalPlayer = Players.LocalPlayer
 local accommodationFactor = 0.1474432
-local targetPart = "HumanoidRootPart","Head"
+local targetPart = {"HumanoidRootPart", "Head"}
 
 -- // Silent Aim Module
 local SilentAim = loadstring(game:HttpGet("https://pastebin.com/raw/2f0mGbMP"))()
@@ -43,8 +43,10 @@ mt.__index = newcclosure(function(t, k)
         print(t, k)
         local CPlayer = SilentAim.Selected
         if (SilentAim.checkSilentAim()) then
-            if (CPlayer.Character:FindFirstChild(targetPart)) then
-                return {p=(CPlayer.Character[targetPart].CFrame.p+(CPlayer.Character[targetPart].Velocity*accommodationFactor))}
+            for i, partName in ipairs(targetPart) do
+                if (CPlayer.Character:FindFirstChild(partName)) then
+                    return {p=(CPlayer.Character[partName].CFrame.p+(CPlayer.Character[partName].Velocity*accommodationFactor))}
+                end
             end
         end
     end
